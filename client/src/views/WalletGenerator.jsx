@@ -28,7 +28,7 @@ export default function WalletGenerator() {
 
     const handleGenerate = async () => {
         try {
-            const phrase = await axios.get("http://localhost:3001/api/mnemonics/generate-mnemonics");
+            const phrase = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:3001"}/api/mnemonics/generate-mnemonics`);
             setSeedPhrase(phrase.data.data);
             setErrors({});
         } catch (err) {
@@ -38,7 +38,7 @@ export default function WalletGenerator() {
 
     const handleImport = async () => {
         try {
-            const result = await axios.post("http://localhost:3001/api/mnemonics/validate-mnemonics", 
+            const result = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:3001"}/api/mnemonics/validate-mnemonics`, 
                 {
                 mnemonics: seedPhrase
                 }

@@ -46,7 +46,7 @@ export default function WalletDisplayer() {
                 try {
                     setLoading(true);
                     const res = await axios.post(
-                        `http://localhost:3001/api/blockchains/${blockchain}`,
+                        `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/api/blockchains/${blockchain}`,
                         { mnemonics: seedPhrase, accountIndex: counter }
                     );
                     setWallets([res.data.data]);
@@ -64,7 +64,7 @@ export default function WalletDisplayer() {
         try {
             setLoading(true);
             const res = await axios.post(
-                `http://localhost:3001/api/blockchains/${blockchain}`,
+                `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/api/blockchains/${blockchain}`,
                 { mnemonics: seedPhrase, accountIndex: counter }
             );
             setWallets((prev) => [...prev, res.data.data]);
