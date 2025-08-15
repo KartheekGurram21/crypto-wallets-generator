@@ -13,8 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/mnemonics", mnemonicRoutes);
-app.use(mnemonicMiddleware);
-app.use("/api/blockchains", blockchainRoutes);
+app.use("/api/blockchains", mnemonicMiddleware, blockchainRoutes);
 
 app.listen(PORT, () => {
     console.log(`server is running successfully on ${PORT}`);
