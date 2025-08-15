@@ -11,6 +11,8 @@ export default function WalletGenerator() {
     const location = useLocation();
 
     const selectedBlockchain = location.pathname;
+    const API_BASE =
+  import.meta.env.VITE_API_URL || "http://localhost:3001";
 
     const bgClass = darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900";
     const cardBg = darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-gray-300";
@@ -28,7 +30,7 @@ export default function WalletGenerator() {
 
     const handleGenerate = async () => {
         try {
-            const phrase = await axios.get(`${process.env.REACT_APP_API_URL || "http://localhost:3001"}/api/mnemonics/generate-mnemonics`);
+            const phrase = await axios.get(`${API_BASE}/api/mnemonics/generate-mnemonics`);
             setSeedPhrase(phrase.data.data);
             setErrors({});
         } catch (err) {
@@ -38,7 +40,7 @@ export default function WalletGenerator() {
 
     const handleImport = async () => {
         try {
-            const result = await axios.post(`${process.env.REACT_APP_API_URL || "http://localhost:3001"}/api/mnemonics/validate-mnemonics`, 
+            const result = await axios.post(`${API_BASE}/api/mnemonics/validate-mnemonics`, 
                 {
                 mnemonics: seedPhrase
                 }

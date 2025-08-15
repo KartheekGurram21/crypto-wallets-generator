@@ -17,6 +17,8 @@ export default function WalletDisplayer() {
     const [counter, setCounter] = useState(0);
     const hasFetched = useRef(false);
     const [loading, setLoading] = useState(false);
+    const API_BASE =
+  import.meta.env.VITE_API_URL || "http://localhost:3001";
 
     // Clear previous wallets and counter when blockchain changes
     useEffect(() => {
@@ -46,7 +48,7 @@ export default function WalletDisplayer() {
                 try {
                     setLoading(true);
                     const res = await axios.post(
-                        `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/api/blockchains/${blockchain}`,
+                        `${API_BASE}/api/blockchains/${blockchain}`,
                         { mnemonics: seedPhrase, accountIndex: counter }
                     );
                     setWallets([res.data.data]);
@@ -64,7 +66,7 @@ export default function WalletDisplayer() {
         try {
             setLoading(true);
             const res = await axios.post(
-                `${process.env.REACT_APP_API_URL || "http://localhost:3001"}/api/blockchains/${blockchain}`,
+                `${API_BASE}/api/blockchains/${blockchain}`,
                 { mnemonics: seedPhrase, accountIndex: counter }
             );
             setWallets((prev) => [...prev, res.data.data]);
