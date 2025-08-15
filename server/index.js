@@ -1,17 +1,17 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+
 const blockchainRoutes = require("./routes/blockchainRoutes");
 const mnemonicRoutes = require("./routes/mnemonicRoutes");
 const { mnemonicMiddleware } = require("./middleware/mnemonicMiddleware");
 
 const PORT = process.env.PORT || 3001;
 
-const domains = [
-    "http://localhost:5173/",
+const allowedOrigins = [
+    "http://localhost:5173",
     process.env.DOMAINS
 ];
-
 
 const app = express();
 
