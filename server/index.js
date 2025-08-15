@@ -7,9 +7,27 @@ const { mnemonicMiddleware } = require("./middleware/mnemonicMiddleware");
 
 const PORT = process.env.PORT || 3001;
 
+const domains = [
+    "http://localhost:5173/",
+    process.env.DOMAINS
+];
+
+
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 app.use("/api/mnemonics", mnemonicRoutes);
